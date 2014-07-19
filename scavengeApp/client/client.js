@@ -35,8 +35,8 @@ Template.dashboard.events({
     // console.log(this.getAttribute('data-id'));
     console.log(this);
     return false;
-  }
-  'click button' : function() {
+  },
+  'click button.new_hunt' : function() {
   	console.log("create new hunt");
   	return false;
   }
