@@ -1,14 +1,22 @@
 Hunts = new Meteor.Collection("hunts");
 
-// Hunts.allow({
-// 	insert: function(name, owner_id, start_location) {
+Hunts.allow({
+	insert: function() {
+		return true;
+	}
 
-// 	}
+	update: function() {
+		return true;
+	}
 
-// 	update: function() {
+	remove: function() {
+		return true;
+	}
 
-// 	}
-// });
+	get: function() {
+		return true;
+	}
+});
 
 createHunt = function(options) {
 	var id = options._id || Random.id();
