@@ -23,10 +23,17 @@ Template.login.events({
     Session.set("user", name);
     return false;
   }
-
 });
 
 Template.dashboard.hunts = function(){
   return Hunts.find({});
 }
 
+Template.dashboard.events({
+  'click button.edit_hunt' : function(){
+    console.log("editing a hunt");
+    // console.log(this.getAttribute('data-id'));
+    console.log(this);
+    return false;
+  }
+});
