@@ -36,4 +36,8 @@ Template.dashboard.events({
     console.log(this);
     return false;
   }
+  'click button' : function() {
+  	console.log("create new hunt");
+  	return false;
+  }
 });
