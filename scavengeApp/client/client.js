@@ -6,7 +6,6 @@ Template.content.user_name = function(){
   return Session.get("user");
 }
 
-
 Template.login.events({
   'click button.login_btn': function(){
     console.log('button clicked');
@@ -26,3 +25,8 @@ Template.login.events({
   }
 
 });
+
+Template.dashboard.hunts = function(){
+  return Hunts.find({});
+}
+

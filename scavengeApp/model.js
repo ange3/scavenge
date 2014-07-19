@@ -1,5 +1,9 @@
 Hunts = new Meteor.Collection("hunts");
 
+// Schema
+// name:
+// owner:
+
 People = new Meteor.Collection("people");
 
 Hunts.allow({
@@ -21,3 +25,5 @@ createHunt = function(options) {
 		// owner : 
 	});
 };
+
+
