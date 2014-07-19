@@ -9,9 +9,6 @@ Hunts.allow({
 	}, 
 	remove: function() {
 		return true;
-	}, 
-	get: function() {
-		return true;
 	}
 });
 
