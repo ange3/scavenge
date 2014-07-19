@@ -1,13 +1,40 @@
 <head>
-  <title>Scavenger</title>
+  <title>Huntr</title>
 </head>
 
 <body>
-  {{> hello}}
+  <h1>Welcome to Huntr</h1>
+  {{> main}}
 </body>
 
+<template name = "main">
+  {{#if user_id}}
+    {{> content}}
+  {{else}}
+    {{> login}}
+  {{/if}}
+</template>
+
+<template name = "login">
+  <form>
+    <fieldset>
+      <legend>Log in or create a new account.</legend>
+      <label>Username</label>
+      <input type="text" id="login_username" placeholder="lisa12">
+<!--       <label>Password</label>
+      <input type="text" placeholder="secrets">
+ -->      <br>
+      <button type="submit" class="login_btn">Submit</button>
+    </fieldset>
+  </form>
+</template>
+
+<template name = "content">
+  <h1>Welcome, {{name}}!!</h1>
+</template>
+
 <template name="hello">
-  <h1>Hello World!</h1>
+  <h1>Create your own hunt!</h1>
   {{greeting}}
   <input type="button" value="Click" />
 </template>
