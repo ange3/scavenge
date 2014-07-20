@@ -40,9 +40,15 @@
 					<td><button class = "delete_task">Delete</button></td>
 				</tr>
 			{{/each}}
+		</table>
+		<table>
+			<tr>
+				<td>
 			{{#if editing_task}}
 				{{> edit_task }}
 			{{/if}}
+			</td>
+		</tr>
 		</table>
 <!-- 		<form>
     	<fieldset>
