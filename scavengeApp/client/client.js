@@ -48,8 +48,17 @@ Template.content.editing_hunt = function() {
 	return Session.get("hunt_edit");
 }
 
+Template.content.observing_hunt = function() {
+  return Session.get("hunt_observe_bool");
+}
+
 Template.content.organizer = function(){
   return Session.get("organizer_true");
+}
+
+Template.content.rendered = function(){
+  Session.set("organizer_true", 0);
+  Session.set("hunt_observe_bool", 0)
 }
 
 
@@ -355,4 +364,5 @@ var getLatLng = function(location, marker_name) {
 Template.hunt_edit.rendered = function() {
   load_map();
   google.maps.event.addDomListener(window, 'load', load_map);
+  
 }

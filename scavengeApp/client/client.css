@@ -8,13 +8,10 @@ body{
 
 .login_page{
 	text-align: center;
-	/*margin-top: 7%;*/
-	background-color: red;
 	min-height:100%;
-	/*padding: 10% 10%;*/
 	padding-top: 15%;
 	padding-bottom: 30%;
-	background: url('/images/bg-home.jpg') no-repeat center center fixed; 
+	background: url('/images/bg-home.jpg') no-repeat top center fixed; 
 	font-family: 'Lato', sans-serif;
 }
 
@@ -27,6 +24,7 @@ body{
 	width: 30%;
 	margin-left: 56%;	
 	border-radius: 5px;
+  margin-top: 25%;
 }
 
 .legend_welcome{

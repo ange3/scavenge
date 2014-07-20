@@ -41,7 +41,11 @@
     {{#if editing_hunt}}
       {{> hunt_edit}}
     {{else}}
-      {{> dashboard}}
+      {{#if observing_hunt}}
+        {{> leaderboard}}
+      {{else}}   
+       {{> dashboard}}
+      {{/if}}
     {{/if}}
   {{else}}
     {{> hunter}}
