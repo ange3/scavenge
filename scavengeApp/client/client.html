@@ -31,6 +31,10 @@
 
 <template name = "content">
   <h1>Hi {{user_name}}!!</h1>
-  {{> dashboard}}
+  {{#if editing_hunt}}
+    {{> hunt_edit}}
+  {{else}}
+    {{> dashboard}}
+  {{/if}}
 </template>
 
