@@ -55,6 +55,12 @@ Template.hunt_edit.hunt_location = function() {
 	return hunt.location;
 }
 
+Template.hunt_edit.hunt_description = function() {
+	var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
+	if (!hunt) return "";
+	return hunt.description;
+}
+
 Template.add_task.creating_task = function() {
 	return Session.get("creating_task");
 }
@@ -99,6 +105,20 @@ Template.hunt_edit.events({
 	'click button.edit_location_button' : function() {
 		var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
 		Hunts.update(hunt._id, {$set: {location: ""}});
+		return false;
+	},
+	'click button.add_description_button' : function() {
+		var descr = document.getElementById("hunt_description_input").value;
+		if (descr) {
+			var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
+			console.log(descr);
+			Hunts.update(hunt._id, {$set: {description: descr}});
+		}
+		return false;
+	},
+	'click button.edit_description_button' : function() {
+		var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
+		Hunts.update(hunt._id, {$set: {description: ""}});
 		return false;
 	},
 });
