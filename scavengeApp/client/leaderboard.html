@@ -1,0 +1,21 @@
+<template name = "leaderboard">
+  <div class = "leaderboard">
+  	<h1> Leaderboard </h1>
+  	  <table class="table" id = "leaderboard_table">
+	    <tbody>
+	      {{#each players}}
+	        <tr>{{> player}}</tr>
+	        {{/each}}
+	    </tbody>
+	  </table>
+	</div>
+
+
+</template>
+
+<template name="player">
+	<td>{{name}} </td>
+	<td> {{score}} </td>
+</template>
+
+
