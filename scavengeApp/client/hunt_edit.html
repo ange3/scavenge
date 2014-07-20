@@ -13,6 +13,18 @@
 			</fieldset>
 		</form>
 	{{/if}}
+	{{#if hunt_description}}
+		<h2>Description: {{hunt_description}}</h2>
+		<button type = "submit" class = "edit_description_button">Change</button>
+	{{else}}
+		<h2>Description: </h2>
+		<form>
+    	<fieldset>
+				<input type = "text" id = "hunt_description_input" placeholder = "Your Description">
+				<button type = "submit" class = "add_description_button">Submit</button>
+			</fieldset>
+		</form>
+	{{/if}}
 
 	<div class = "row">
     <div class = "span7">
@@ -60,7 +72,6 @@
           {{> edit_task }}
         {{/if}}
 			{{/each}}
-			
 		</table>
 	</div>
 </template>

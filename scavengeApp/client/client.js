@@ -26,7 +26,17 @@ Template.login.events({
 // Nav Bar
 Template.navBar.user_name = function(){
   return Session.get("user");
-}
+
+Template.navBar.events({
+  'click button.logout_button' : function() {
+    for (key in Session.keys) {
+      Session.set(key, "");
+    }
+    return true;
+  }
+});
+
+
 
 Template.content.editing_hunt = function() {
 	return Session.get("hunt_edit");
@@ -40,7 +50,11 @@ Template.content.organizer = function(){
 // Organizer Dashboard Page (list of hunts)
 
 Template.dashboard.hunts = function(){
-  return Hunts.find({}, {sort: {creation_date: -1}});
+  return Hunts.find({owner: Session.get("user")}, {sort: {creation_date: -1}});
+}
+
+Template.dashboard.creating_hunt = function() {
+  return Session.get("creating_hunt");
 }
 
 Template.dashboard.creating_hunt = function() {
@@ -57,21 +71,36 @@ Template.dashboard.events({
     return false;
   },
   'click button.new_hunt' : function() {
-  	console.log("create new hunt");
-  	Session.set("creating_hunt", 1);
-  	return false;
+    console.log("create new hunt");
+    Session.set("creating_hunt", 1);
+    return false;
   },
   'click button.insert_hunt' : function() {
-  	var hunt_name = document.getElementById("hunt_name_input").value;
-  	// console.log("Insering hunt");
-  	Session.set("creating_hunt", 0);
-  	if (hunt_name) Hunts.insert({name: hunt_name, owner: Session.get("user"), creation_date: new Date()});
-  	return false;
+    var hunt_name = document.getElementById("hunt_name_input").value;
+    // console.log("Insering hunt");
+    Session.set("creating_hunt", 0);
+    if (hunt_name) Hunts.insert({name: hunt_name, owner: Session.get("user"), creation_date: new Date()});
+    return false;
   }
 });
 
 
+
 // Editing Hunt Page
+
+Template.hunt_edit.hunt_description = function() {
+  var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
+  if (!hunt) return "";
+  return hunt.description;
+}
+
+Template.add_task.tasks = function(){
+  return Tasks.find({hunt: Session.get("hunt_edit")});
+}
+
+Template.add_task.creating_task = function() {
+  return Session.get("creating_task");
+}
 
 Template.add_task.creating_task = function() {
   return Session.get("creating_task");
@@ -111,6 +140,20 @@ Template.hunt_edit.events({
 		Hunts.update(hunt._id, {$set: {location: ""}});
 		return false;
 	},
+	'click button.add_description_button' : function() {
+		var descr = document.getElementById("hunt_description_input").value;
+		if (descr) {
+			var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
+			console.log(descr);
+			Hunts.update(hunt._id, {$set: {description: descr}});
+		}
+		return false;
+	},
+	'click button.edit_description_button' : function() {
+		var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
+		Hunts.update(hunt._id, {$set: {description: ""}});
+		return false;
+	},
 });
 
 // Errors in Edit Hunt page
@@ -146,7 +189,9 @@ Template.add_task.events({
 										points: task_points.value,
 										location: task_location.value,
 										question: task_question.value,
-										answer: task_answer.value
+										answer: task_answer.value,
+										hunt_id: Hunts.find({name: Session.get("hunt_edit")}).fetch()[0]._id
+
 									});
 			task_name.value = "";
 			task_points.value = "";
