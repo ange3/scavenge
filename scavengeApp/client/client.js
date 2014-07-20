@@ -6,6 +6,15 @@ Template.navBar.user_name = function(){
   return Session.get("user");
 }
 
+Template.navBar.events({
+	'click button.logout_button' : function() {
+		for (key in Session.keys) {
+			Session.set(key, "");
+		}
+		return true;
+	}
+});
+
 Template.login.events({
   'click button.login_btn': function(){
     console.log('button clicked');
@@ -177,7 +186,9 @@ Template.add_task.events({
 										points: task_points.value,
 										location: task_location.value,
 										question: task_question.value,
-										answer: task_answer.value
+										answer: task_answer.value,
+										hunt_id: Hunts.find({name: Session.get("hunt_edit")}).fetch()[0]._id
+
 									});
 			task_name.value = "";
 			task_points.value = "";

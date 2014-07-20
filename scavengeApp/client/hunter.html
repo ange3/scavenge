@@ -1,3 +1,31 @@
 <template name = "hunter">
-	<h1>HUNTER PLAYER PAGE</h1>
+	{{#if viewing_hunt }}
+		{{> player_hunt_view }}
+	{{else}}
+		<h1>Enter Hunt ID</h1>
+		<form>
+			<fieldset>
+				<input type = "text" id = "hunt_id_input" placeholder = "ID">
+				<button type = "submit" class = "hunt_id_submit">Submit</button>
+			</fieldset>
+		</form>
+	{{/if}}
+
 </template>
+
+<template name = "player_hunt_view">
+	{{#if hunt_started}}
+		<div class = "hunt_card">
+			<h1>
+				{{ task_name }}
+				{{ task_description }}
+				{{ task_question }}
+			</h1>
+		</div>
+	{{else}}
+		<h1>Welcome!</h1>
+		<button class="start_hunt">Start the hunt!</button>
+	{{/if}}
+</template>
+
+<!--Bn5WwcSQEaRnQe9DL -->
