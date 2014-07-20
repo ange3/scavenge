@@ -1,18 +1,17 @@
 <template name = "dashboard"> 
   <h1>Hi {{user_name}}!!</h1>
+  {{#if creating_hunt}}
+    {{> new_hunt }}
+  {{else}}
+    <button class = "new_hunt"> Create new Hunt </button>
+  {{/if}}
 	<h1>Your Hunts</h1>
 	{{#each hunts}}
 		{{> hunt}}
 	{{/each}}
 </template>
 
-<template name="hunt">
-  {{#if creating_hunt}}
-    {{> new_hunt }}
-  {{else}}
-    <button class = "new_hunt"> Create new Hunt </button>
-  {{/if}}
-	
+<template name="hunt">	
 	<div class = "hunt_row">
 		{{name}}
 		<p>This is a hunt. Hunt or die!!</p>

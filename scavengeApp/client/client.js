@@ -33,7 +33,7 @@ Template.add_task.tasks = function(){
 	return Tasks.find({hunt: Session.get("hunt_edit")});
 }
 
-Template.hunt.creating_hunt = function() {
+Template.dashboard.creating_hunt = function() {
 	return Session.get("creating_hunt");
 }
 
@@ -87,6 +87,9 @@ Template.hunt_edit.events({
 		var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
 		Hunts.update(hunt._id, {$set: {location: ""}});
 		return false;
+	},
+	'load div#edit_hunt_map_canvas' : function() {
+		console.log("map");
 	}
 });
 
