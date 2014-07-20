@@ -26,7 +26,7 @@ Template.login.events({
 });
 
 Template.dashboard.hunts = function(){
-  return Hunts.find({}, {sort: {creation_date: -1}});
+  return Hunts.find({owner: Session.get("user")}, {sort: {creation_date: -1}});
 }
 
 Template.add_task.tasks = function(){
