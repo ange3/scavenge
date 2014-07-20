@@ -30,15 +30,18 @@ Template.hunter.events({
 				ptaskmap[task._id] = 0;
 			}
 		}
+		return false;
 	}
 });
 
 Template.player_hunt_view.events({
 	'click button.start_hunt' : function() {
 		Session.set("hunt_started", 1);
+		return false;
 	},
 	'click button.hunt_answer_submit' : function() {
-		PlayerAnswerMaps.update()
+		PlayerAnswerMaps.update();
+		return false;
 	}
 });
 
