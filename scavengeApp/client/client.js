@@ -55,6 +55,11 @@ Template.add_task.creating_task = function() {
 	return Session.get("creating_task");
 }
 
+Template.add_task.editing_task = function() {
+	console.log(this);
+	return Session.get("editing_task");
+}
+
 Template.dashboard.events({
   'click button.edit_hunt' : function(){
     console.log("editing a hunt");
@@ -166,5 +171,25 @@ Template.add_task.events({
   },
   'click button.delete_task' : function() {
   	Tasks.remove(this._id);
-  }
+  },
+  'click button.edit_task_button' : function() {
+  	Session.set("editing_task", this._id);
+  },
+  'click button.submit_edit_task_button' : function() {
+  	var id = Session.get("editing_task");
+		var task_name = document.getElementById("edit_task_input").value;
+		var task_points = document.getElementById("edit_task_points").value;
+		var task_location = document.getElementById("edit_task_location").value;
+		var task_question = document.getElementById("edit_task_question").value;
+		var task_answer = document.getElementById("edit_task_answer").value;
+		
+		if (task_name) Tasks.update(id, {$set: {name: task_name}});
+		if (task_points) Tasks.update(id, {$set: {points: task_points}});
+		if (task_location) Tasks.update(id, {$set: {location: task_location}});
+		if (task_question) Tasks.update(id, {$set: {name: task_question}});
+		if (task_answer) Tasks.update(id, {$set: {name: task_answer}});
+
+		Session.set("editing_task", 0);
+		return false;
+	},
 });
