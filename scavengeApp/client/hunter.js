@@ -12,6 +12,22 @@ Template.hunter.events({
 			var to_set = {};
 			to_set[hunt_id] = new_score;
 			PlayerScoreMaps.update(pscoremap._id, {$set : to_set});
+
+			var phtnm = PlayerHuntTaskNumberMaps.findOne({user_id : player._id});
+			
+			var task_num = phtnm[hunt_id];
+			if (!task_num) {
+				task_num = 0;
+				phtnm[hunt_id] = 0;
+			}
+			var h_id = hunt_id;
+			var ptaskmap = PlayerTaskStatusMaps.findOne({user_id : player._id});
+			var task = Tasks.find({hunt_id : h_id}).fetch()[task_num];
+			var status = ptaskmap[task._id];
+			if (!status) {
+				status = 0;
+				ptaskmap[task._id] = 0;
+			}
 		}
 	}
 });
@@ -19,6 +35,9 @@ Template.hunter.events({
 Template.player_hunt_view.events({
 	'click button.start_hunt' : function() {
 		Session.set("hunt_started", 1);
+	},
+	'click button.hunt_answer_submit' : function() {
+		PlayerAnswerMaps.update()
 	}
 });
 
@@ -58,6 +77,13 @@ Template.player_hunt_view.task_location = function() {
 	if (!hunt || !first_task_in_hunt(hunt)) return "";
 	return first_task_in_hunt(Session.get("viewing_hunt")).location;
 }
+
+Template.player_hunt_view.task_points = function() {
+	var hunt = Session.get("viewing_hunt");
+	if (!hunt || !first_task_in_hunt(hunt)) return "";
+	return first_task_in_hunt(Session.get("viewing_hunt")).points;
+}
+
 
 
 

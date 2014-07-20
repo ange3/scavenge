@@ -18,7 +18,9 @@ Template.login.events({
       console.log("Creating new user.");
       var uid = People.insert({username: name});
       PlayerScoreMaps.insert({user_id: uid});
-      PlayerTaskMaps.insert({user_id: uid});
+      PlayerTaskStatusMaps.insert({user_id: uid});
+      PlayerHuntTaskNumberMaps.insert({user_id: uid});
+      PlayerAnswerMaps.insert({user_id: uid});
     }
     Session.set("user", name);
     var uname = name;

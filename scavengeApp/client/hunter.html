@@ -17,13 +17,23 @@
 	{{#if hunt_started}}
 		<div class = "hunt_card">
 			<h1> {{ task_name }} </h1>
-			<h2> {{ task_location }} </h2>
+			<div class = "hunt_points"> 
+				{{ task_points }}
+			</div>
 			<div class = "task_description">
 				{{ task_description }}
 			</div>
 			<div class = "task_question">
 				{{ task_question }}
 			</div>
+			<form>
+				<fieldset>
+					<input type = "text" id = "hunt_answer_input" placeholder = "Your Answer">
+					<button type = "submit" class = "hunt_answer_submit">Submit</button> <br>
+					<input type = "text" id = "hunt_photo_input" placeholder = "Upoad Photo">
+					<button type = "submit" class = "hunt_photo_submit">Submit</button>
+				</fieldset>
+			</form>
 		</div>
 	{{else}}
 		<h1>Welcome!</h1>
