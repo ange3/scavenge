@@ -2,7 +2,7 @@ Template.main.user_name = function(){
   return Session.get("user");
 }
 
-Template.content.user_name = function(){
+Template.dashboard.user_name = function(){
   return Session.get("user");
 }
 
@@ -33,11 +33,19 @@ Template.hunt.creating_hunt = function() {
 	return Session.get("creating_hunt");
 }
 
+Template.content.editing_hunt = function() {
+	return Session.get("hunt_edit");
+}
+
+Template.hunt_edit.hunt_name = function() {
+	return Session.get("hunt_edit");
+}
+
 Template.dashboard.events({
   'click button.edit_hunt' : function(){
     console.log("editing a hunt");
-    // console.log(this.getAttribute('data-id'));
-    console.log(this);
+    // console.log(this);
+    Session.set("hunt_edit", this.name);
     return false;
   },
   'click button.new_hunt' : function() {
@@ -47,10 +55,9 @@ Template.dashboard.events({
   },
   'click button.insert_hunt' : function() {
   	var hunt_name = document.getElementById("hunt_name_input").value;
-  	if (!hunt_name) return false;
-  	console.log("Insering hunt");
+  	// console.log("Insering hunt");
   	Session.set("creating_hunt", 0);
-  	Hunts.insert({name: hunt_name, owner: Session.get("user"), creation_date: new Date()});
+  	if (hunt_name) Hunts.insert({name: hunt_name, owner: Session.get("user"), creation_date: new Date()});
   	return false;
   }
 });
