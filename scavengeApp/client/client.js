@@ -241,16 +241,20 @@ Template.add_task.events({
   'click button.cancel-new-task' : function(){
     Session.set("creating_task", 0);
     Session.set("error", null)
+    return false;
   },
   'click button.delete_task' : function() {
   	Tasks.remove(this._id);
+  	return false;
   },
   'click button.edit_task_button' : function() {
   	Session.set("editing_task", this._id);
+  	return false;
   },
   'click button.cancel-edit-task' : function(){
     Session.set("editing_task", 0);
     Session.set("error", null);
+    return false;
   },
   'click button.submit_edit_task_button' : function() {
   	var id = Session.get("editing_task");
