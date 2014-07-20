@@ -26,6 +26,7 @@ Template.login.events({
 // Nav Bar
 Template.navBar.user_name = function(){
   return Session.get("user");
+}
 
 Template.navBar.events({
   'click button.logout_button' : function() {
