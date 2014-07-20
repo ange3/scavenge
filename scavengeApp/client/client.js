@@ -29,6 +29,10 @@ Template.dashboard.hunts = function(){
   return Hunts.find({});
 }
 
+Template.hunt.creating_hunt = function() {
+	return Session.get("creating_hunt");
+}
+
 Template.dashboard.events({
   'click button.edit_hunt' : function(){
     console.log("editing a hunt");
@@ -38,6 +42,15 @@ Template.dashboard.events({
   },
   'click button.new_hunt' : function() {
   	console.log("create new hunt");
+  	Session.set("creating_hunt", 1);
+  	return false;
+  },
+  'click button.insert_hunt' : function() {
+  	var hunt_name = document.getElementById("hunt_name_input").value;
+  	if (!hunt_name) return false;
+  	console.log("Insering hunt");
+  	Session.set("creating_hunt", 0);
+  	Hunts.insert({name: hunt_name, owner: Session.get("user"), creation_date: new Date()});
   	return false;
   }
 });

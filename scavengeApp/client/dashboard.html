@@ -6,11 +6,28 @@
 </template>
 
 <template name="hunt">
-	<button class = "new_hunt"> Create new Hunt </button>
+  {{#if creating_hunt}}
+    {{> new_hunt }}
+  {{else}}
+    <button class = "new_hunt"> Create new Hunt </button>
+  {{/if}}
+	
 	<div class = "hunt_row">
 		{{name}}
 		<p>This is a hunt. Hunt or die!!</p>
+    {{creation_date}}
 		<button class = "edit_hunt"> Work on this hunt </button>
 	</div>
 	
+</template>
+
+<template name ="new_hunt">
+	<form>
+    <fieldset>
+      <!-- <label>Hunt Name</label> -->
+      <input type="text" id="hunt_name_input" placeholder="Hunt Name">
+      <br>
+      <button type="submit" class="insert_hunt">Submit</button>
+    </fieldset>
+  </form>
 </template>
