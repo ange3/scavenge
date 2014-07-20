@@ -57,8 +57,9 @@ Template.content.organizer = function(){
 }
 
 Template.content.rendered = function(){
-  Session.set("organizer_true", 0);
-  Session.set("hunt_observe_bool", 0)
+  Session.set("organizer_true", 1);
+  Session.set("hunt_observe_bool", 0);
+  
 }
 
 
@@ -82,6 +83,7 @@ Template.dashboard.events({
     console.log("editing a hunt");
     // console.log(this);
     Session.set("hunt_edit", this.name);
+    Session.set("hunt_observe_bool", 0);
     Session.set("hunt_location", this.location);
 
     return false;
@@ -102,7 +104,8 @@ Template.dashboard.events({
     console.log("observing a hunt");
     // console.log(this);
     Session.set("hunt_observe_bool", 1);
-    Session.set("hunt_edit", this.name);
+    Session.set("hunt_edit", 0);
+    // Session.set("hunt_edit", this.name);
     Session.set("hunt_location", this.location);
 
     return false;
