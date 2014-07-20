@@ -5,7 +5,7 @@ Template.hunter.events({
 		console.log(hunt);
 		if (hunt) {
 			Session.set("viewing_hunt", hunt._id);
-
+			var hunt_id = hunt._id;
 			var player = People.findOne({username: Session.get("user")});
 
 			var pscoremap = PlayerScoreMaps.findOne({user_id : player._id});
@@ -24,7 +24,11 @@ Template.hunter.events({
 			}
 			var h_id = hunt._id;
 			var ptaskmap = PlayerTaskStatusMaps.findOne({user_id : player._id});
-			var task = Tasks.find({hunt_id : h_id}).fetch()[task_num];
+			// console.log(task_num);
+			// console.log(Tasks.find({hunt_id : h_id}).fetch());
+			var task_list = Tasks.find({hunt_id : h_id}).fetch();
+			if (task_list.length === 0) return false;
+			var task = [task_num];
 			var status = ptaskmap[task._id];
 			if (!status) {
 				status = 0;
