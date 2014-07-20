@@ -6,13 +6,10 @@
 </head>
 
 <body>
-  {{> navBar}}
+  
   {{> main}}
 </body>
 
-<template name="navBar">
-
-</template>
 
 <template name = "main">
   {{#if user_name}}
@@ -39,10 +36,31 @@
 </template>
 
 <template name = "content">
-  {{#if editing_hunt}}
-    {{> hunt_edit}}
+  {{> navBar}}
+  {{#if organizer}}
+    {{#if editing_hunt}}
+      {{> hunt_edit}}
+    {{else}}
+      {{> dashboard}}
+    {{/if}}
   {{else}}
-    {{> dashboard}}
+    {{> hunter}}
   {{/if}}
 </template>
 
+
+<template name="navBar">
+  <div class="navbar" id = "huntr_navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">Huntr</a>
+      <ul class="nav">
+        <li><a href="#" class = "organizer_view">Organizer</a></li>
+        <li><a href="#" class = "hunter_view">Hunter</a></li>
+        <!-- <li><a href="#">Link</a></li> -->
+      </ul>
+    </div>
+    <div class="greeting">
+      <p>Hi {{user_name}}!</p>
+    </div>
+  </div>
+</template>

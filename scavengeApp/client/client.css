@@ -107,3 +107,8 @@ body{
 	margin: auto;
 	margin-bottom: 30px;
 }
+
+/*Nav bar*/
+.huntr_navbar{
+	background-color: black;
+}

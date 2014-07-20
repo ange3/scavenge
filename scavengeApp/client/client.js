@@ -2,7 +2,7 @@ Template.main.user_name = function(){
   return Session.get("user");
 }
 
-Template.dashboard.user_name = function(){
+Template.navBar.user_name = function(){
   return Session.get("user");
 }
 
@@ -39,6 +39,10 @@ Template.dashboard.creating_hunt = function() {
 
 Template.content.editing_hunt = function() {
 	return Session.get("hunt_edit");
+}
+
+Template.content.organizer = function(){
+  return Session.get("organizer_true");
 }
 
 Template.hunt_edit.hunt_name = function() {
