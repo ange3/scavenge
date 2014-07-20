@@ -184,7 +184,7 @@ Template.add_task.events({
 		var task_answer = document.getElementById("add_task_answer");
 
 		
-		if (task_name.value && task_points.value && task_location.value) {
+		if (task_name.value && task_points.value && task_location.value && task_question.value && task_answer.value) {
 			Tasks.insert({name: task_name.value, 
 										hunt: Session.get("hunt_edit"),
 										points: task_points.value,
@@ -237,15 +237,15 @@ Template.add_task.events({
 		var task_question = document.getElementById("edit_task_question").value;
 		var task_answer = document.getElementById("edit_task_answer").value;
 
-    if (task_name === "" || task_points === "" || task_location === ""){
-      Session.set("error", "Name, Points, and Location are required fields.");
+    if (task_name === "" || task_points === "" || task_location === "" || task_question === "" || task_answer === ""){
+      Session.set("error", "Please fill in all the fields.");
       console.log("FIELDS ERROR");
     } else {
       if (task_name) Tasks.update(id, {$set: {name: task_name}});
       if (task_points) Tasks.update(id, {$set: {points: task_points}});
       if (task_location) Tasks.update(id, {$set: {location: task_location}});
-      if (task_question) Tasks.update(id, {$set: {name: task_question}});
-      if (task_answer) Tasks.update(id, {$set: {name: task_answer}});
+      if (task_question) Tasks.update(id, {$set: {question: task_question}});
+      if (task_answer) Tasks.update(id, {$set: {answer: task_answer}});
 
       Session.set("editing_task", 0);
       Session.set("error", null)
@@ -309,9 +309,9 @@ var load_map = function() {
   var edit_hunt_map = map;
 
   init_map_from_address(address, map_id, edit_hunt_map, zoom);
-  setInterval(function(){
+  // setInterval(function(){
     add_markers();
-  }, 5000);
+  // }, 5000);
   
 };
 

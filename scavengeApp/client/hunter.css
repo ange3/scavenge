@@ -33,3 +33,21 @@
 .hunt_card{
   text-align: center;
 }
+
+.task_info{
+  background-color: rgba(59,134,134,0.5);
+  padding: 10px 10px;
+  width: 40%;
+  margin: auto;
+  margin-bottom: 80px;
+  border-radius: 10px;
+}
+
+.task_points{
+  font-style: italic;
+}
+
+.task_question{
+  margin-top: 16px;
+  font-size: 16px;
+}
