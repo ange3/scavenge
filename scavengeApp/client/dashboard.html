@@ -25,16 +25,15 @@
 
 <template name="hunt">	
 	<td>{{name}}</td>
-
-  <a href="/hunt_edit.html"><button class = "edit_hunt" id = "hunt_button_edit"> 
-    Observe
-    <!-- <i class="icon-eye-open"></i>  -->
-  </button></a>
-
-	<a href="/hunt_edit.html"><button class = "edit_hunt" id = "hunt_button_edit"> 
-    <i class="icon-pencil icon-white"></i>
-  </button></a>
-
+  <div id = "hunt_button_edit">
+    <button class = "edit_hunt"> 
+      <i class="icon-pencil icon-white"></i>
+    </button>
+    <button class = "edit_hunt" > 
+      Observe
+      <!-- <i class="icon-eye-open"></i>  -->
+    </button>
+  </div>
   
 </template>
 
