@@ -1,0 +1,35 @@
+.find_hunt_style{
+  margin-top: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  text-align: center;
+  background-color: rgba(59,134,134,0.5);
+}
+
+.welcome{
+  text-align: center;
+}
+
+.welcome p{
+  font-size: 30px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+#buttons-welcome{
+  padding: 10px 15px;
+  font-size: 12px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+
+  color: #fff;
+  background-color: rgba(59,134,134,0.5);
+  text-align: right;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.hunt_card{
+  text-align: center;
+}

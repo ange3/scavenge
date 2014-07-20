@@ -282,7 +282,6 @@ init_map_from_address = function(address, map_id, map, zoom_level) {
         map_options
       );
     }
-    add_markers();
 
   });
 }
@@ -310,7 +309,9 @@ var load_map = function() {
   var edit_hunt_map = map;
 
   init_map_from_address(address, map_id, edit_hunt_map, zoom);
-
+  setInterval(function(){
+    add_markers();
+  }, 5000);
   
 };
 
@@ -349,4 +350,5 @@ var getLatLng = function(location, marker_name) {
 
 Template.hunt_edit.rendered = function() {
   load_map();
+  google.maps.event.addDomListener(window, 'load', load_map);
 }

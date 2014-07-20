@@ -2,13 +2,17 @@
 	{{#if viewing_hunt }}
 		{{> player_hunt_view }}
 	{{else}}
-		<h1>Enter Hunt ID</h1>
+  <div class = "find_hunt_style">
+		<h1 style="margin-bottom: 40px;">Enter Hunt ID</h1>
 		<form>
 			<fieldset>
 				<input type = "text" id = "hunt_id_input" placeholder = "ID">
-				<button type = "submit" class = "hunt_id_submit">Submit</button>
+				<button type = "submit" class = "hunt_id_submit" id = "buttons">
+          BEGIN HUNT
+        </button>
 			</fieldset>
 		</form>
+  </div>
 	{{/if}}
 
 </template>
@@ -29,15 +33,18 @@
 			<form>
 				<fieldset>
 					<input type = "text" id = "hunt_answer_input" placeholder = "Your Answer">
-					<button type = "submit" class = "hunt_answer_submit">Submit</button> <br>
+					<button type = "submit" class = "hunt_answer_submit" id = "buttons"><i class="icon-arrow-right icon-white"></i></button> <br>
 					<input type = "text" id = "hunt_photo_input" placeholder = "Upoad Photo">
-					<button type = "submit" class = "hunt_photo_submit">Submit</button>
+					<button type = "submit" class = "hunt_photo_submit" id = "buttons"><i class="icon-arrow-right icon-white"></i></button>
 				</fieldset>
 			</form>
 		</div>
 	{{else}}
-		<h1>Welcome!</h1>
-		<button class="start_hunt">Start the hunt!</button>
+    <div class = "welcome">
+  		<p>Welcome!</p>
+      <br>
+  		<button class="start_hunt" id="buttons-welcome">Start the hunt!</button>
+    </div>
 	{{/if}}
 </template>
 
