@@ -1,4 +1,11 @@
 /* CSS declarations go here */
+body{
+	font-family: 'Lato', sans-serif;
+	background-color: rgba(121,189,154,0.8);
+	background: url('/images/bg-dashboard.jpg') no-repeat center center fixed; 
+
+}
+
 .login_page{
 	text-align: center;
 	/*margin-top: 7%;*/
@@ -7,7 +14,7 @@
 	/*padding: 10% 10%;*/
 	padding-top: 15%;
 	padding-bottom: 30%;
-	background: url('/images/background-backpacker-resize.jpg') no-repeat center center fixed; 
+	background: url('/images/bg-home.jpg') no-repeat center center fixed; 
 	font-family: 'Lato', sans-serif;
 }
 
@@ -44,4 +51,59 @@
   /*background-color: #3B8686;*/
   background-color: rgba(59,134,134,0.5);
   /*border-color: #357ebd;*/
+}
+
+
+/*Dashboard CSS*/
+
+.greeting{
+	font-size: 20px;
+	text-align: right;
+	color: white;
+	padding: 10px;
+}
+
+.dashboard{
+	text-align: center;
+}
+
+.dashboard h1{
+	color: rgba(40,110,115,1);
+	margin-bottom: 30px;
+}
+
+
+#hunt_button_new{
+	padding: 3px 8px;
+  font-size: 12px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+
+  color: #fff;
+  background-color: rgba(59,134,134,0.5);
+  text-align: right;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+#hunt_button_edit{
+  font-size: 12px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  color: #fff;
+  background-color: rgba(59,134,134,0.5);
+	margin: 5px;
+	float: right;
+}
+
+
+#hunts_table {
+	margin-top: 20px;
+	align: center;
+	width: 50%;
+	background-color: rgba(255,255,255,0.5);
+	margin: auto;
+	margin-bottom: 30px;
 }
