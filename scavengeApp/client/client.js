@@ -88,10 +88,47 @@ Template.hunt_edit.events({
 		Hunts.update(hunt._id, {$set: {location: ""}});
 		return false;
 	},
-	'load div#edit_hunt_map_canvas' : function() {
-		console.log("map");
-	}
 });
+
+init_map_from_address = function(address, map_id, map, zoom_level) {
+	var geocoder = new google.maps.Geocoder();
+	var results = null;
+	var status = null;
+	var map_options = null;
+	geocoder.geocode({'address' : address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			var lat = results[0].geometry.location['k'];
+			var lng = results[0].geometry.location['B'];
+			console.log(lat, lng);
+			var latlng = new google.maps.LatLng(lat, lng);
+			map_options = {
+				zoom: zoom_level,
+				center: latlng
+			};
+			map = new google.maps.Map(
+				document.getElementById(map_id),
+				map_options
+			);
+			console.log(map);
+		}
+	});
+
+}
+
+Template.hunt_edit.rendered = function() {
+	var address = "760 Market Street, San Francisco, CA";
+	var options_key = "edit_hunt_map_options";
+	var map_id = "edit_hunt_map_canvas";
+	var zoom = 16;
+	var edit_hunt_map = null;
+
+	var latlng = new google.maps.LatLng(-34.397, 150.644);
+  var mapOptions = {
+    zoom: 8,
+    center: latlng
+  };
+	init_map_from_address(address, map_id, edit_hunt_map, zoom);
+}
 
 
 Template.add_task.events({
