@@ -117,6 +117,10 @@ body{
 }
 
 /*Hunter editing page*/
+#add_task_container{
+	margin-top: 40px;
+}
+
 .edit_hunt_style{
 	margin-left: 4%;
 }
@@ -146,4 +150,10 @@ body{
 
 .input{
 	margin-right: 5px;
+}
+
+.hunt_info{
+	font-size: 18px;
+	margin-left: 10px; 
+	margin-right: 10px;
 }

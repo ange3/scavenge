@@ -1,30 +1,38 @@
 <template name = "hunt_edit">
 <div class = "edit_hunt_style">
 	<h1>{{hunt_name}}</h1>
-	{{#if hunt_location}}
-		<h2>Location: {{hunt_location}}</h2>
-		<button type = "submit" class = "edit_location_button" id = "buttons">Change</button>
-	{{else}}
-		<h2>Location: </h2>
-		<form>
-    	<fieldset>
-				<input type = "text" id = "hunt_location_input" placeholder = "Your Location">
-				<button type = "submit" class = "add_location_button" id = "buttons">Submit</button>
-			</fieldset>
-		</form>
-	{{/if}}
-	{{#if hunt_description}}
-		<h2>Description: {{hunt_description}}</h2>
-		<button type = "submit" class = "edit_description_button">Change</button>
-	{{else}}
-		<h2>Description: </h2>
-		<form>
-    	<fieldset>
-				<input type = "text" id = "hunt_description_input" placeholder = "Your Description">
-				<button type = "submit" class = "add_description_button">Submit</button>
-			</fieldset>
-		</form>
-	{{/if}}
+  <div class = "hunt_info">
+  	{{#if hunt_location}}
+      <b>Location:</b> {{hunt_location}}
+      <button type = "submit" class = "edit_location_button" id = "buttons">
+        <i class="icon-edit icon-white"></i>
+      </button>
+  	{{else}}
+  		<b>Location:</b>
+  		<form>
+      	<fieldset>
+  				<input type = "text" id = "hunt_location_input" placeholder = "Your Location" value = {{hunt_location}}>
+  				<button type = "submit" class = "add_location_button" id = "buttons">Submit</button>
+  			</fieldset>
+  		</form>
+  	{{/if}}
+    <br>
+  	{{#if hunt_description}}
+      <span style="margin-right: 10px;"><b>Description:</b> {{hunt_description}}</span>
+      <button type = "submit" class = "edit_description_button" id = "buttons">
+        <i class="icon-edit icon-white"></i>
+      </button>
+  		
+  	{{else}}
+  		<b>Description: </b>
+  		<form>
+      	<fieldset>
+  				<input type = "text" id = "hunt_description_input" placeholder = "Your Description" value = {{hunt_description}}>
+  				<button type = "submit" class = "add_description_button" id = "buttons">Submit</button>
+  			</fieldset>
+  		</form>
+  	{{/if}}
+  </div>
 
 	<div class = "row">
     <div class = "span7">
@@ -44,7 +52,7 @@
 
 <template name = "add_task">
 	<div id = "add_task_container">
-		<h3>Tasks/Puzzles</h3>
+		<h3>Tasks & Puzzles</h3>
     
 		{{#if creating_task}}
 	    {{> new_task }}
