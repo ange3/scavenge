@@ -97,10 +97,11 @@ Template.dashboard.events({
     Session.set("creating_hunt", 0);
     if (hunt_name) Hunts.insert({name: hunt_name, owner: Session.get("user"), creation_date: new Date()});
     return false;
-  }
-  'click button.observe_hunt' : function(){
+  },
+  'click button.observe_hunt' : function() {
     console.log("observing a hunt");
     // console.log(this);
+    Session.set("hunt_observe_bool", 1);
     Session.set("hunt_edit", this.name);
     Session.set("hunt_location", this.location);
 
