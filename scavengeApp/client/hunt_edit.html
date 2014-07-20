@@ -25,20 +25,43 @@
 <template name = "add_task">
 	<div id = "add_task_container">
 		<h3>Tasks/Puzzles</h3>
+		{{#if creating_task}}
+	    {{> new_task }}
+	  {{else}}
+	    <button class = "new_task_button"> Create new task </button>
+	  {{/if}}
 		<table>
 			{{#each tasks}}
 				<tr>
 					<td>{{this.name}}</td>
 					<td>{{this.points}}</td>
+					<!-- <td>{{this.location}}</td> -->
+					<td><button class = "delete_task">Delete</button></td>
 				</tr>
 			{{/each}}
 		</table>
+<!-- 		<form>
+    	<fieldset>
+				<input type = "text" id = "add_task_input" placeholder = "Task">
+				<input type = "text" id = "add_task_points" placeholder = "Points">
+				<input type = "text" id = "add_task_location" placeholder = "Location">
+				<input type = "text" id = "add_task_question" placeholder = "Question">
+				<input type = "text" id = "add_task_answer" placeholder = "Answer">
+				<button type = "submit" class = "add_task_button">+</button>
+			</fieldset>
+		</form> -->
+	</div>
+</template>
+
+<template name ="new_task">
 		<form>
     	<fieldset>
 				<input type = "text" id = "add_task_input" placeholder = "Task">
 				<input type = "text" id = "add_task_points" placeholder = "Points">
+				<input type = "text" id = "add_task_location" placeholder = "Location">
+				<input type = "text" id = "add_task_question" placeholder = "Question">
+				<input type = "text" id = "add_task_answer" placeholder = "Answer">
 				<button type = "submit" class = "add_task_button">+</button>
 			</fieldset>
 		</form>
-	</div>
 </template>

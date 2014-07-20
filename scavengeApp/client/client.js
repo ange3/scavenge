@@ -51,6 +51,10 @@ Template.hunt_edit.hunt_location = function() {
 	return hunt.location;
 }
 
+Template.add_task.creating_task = function() {
+	return Session.get("creating_task");
+}
+
 Template.dashboard.events({
   'click button.edit_hunt' : function(){
     console.log("editing a hunt");
@@ -99,7 +103,7 @@ init_map_from_address = function(address, map_id, map, zoom_level) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			var lat = results[0].geometry.location['k'];
 			var lng = results[0].geometry.location['B'];
-			console.log(lat, lng);
+
 			var latlng = new google.maps.LatLng(lat, lng);
 			map_options = {
 				zoom: zoom_level,
@@ -109,7 +113,6 @@ init_map_from_address = function(address, map_id, map, zoom_level) {
 				document.getElementById(map_id),
 				map_options
 			);
-			console.log(map);
 		}
 	});
 
@@ -135,14 +138,33 @@ Template.add_task.events({
 	'click button.add_task_button' : function() {
 		var task_name = document.getElementById("add_task_input");
 		var task_points = document.getElementById("add_task_points");
-		if (task_name && task_points) {
+		var task_location = document.getElementById("add_task_location");
+		var task_question = document.getElementById("add_task_question");
+		var task_answer = document.getElementById("add_task_answer");
+		
+		if (task_name.value && task_points.value && task_location.value) {
 			Tasks.insert({name: task_name.value, 
 										hunt: Session.get("hunt_edit"),
-										points: task_points.value
+										points: task_points.value,
+										location: task_location.value,
+										question: task_question.value,
+										answer: task_answer.value
 									});
 			task_name.value = "";
 			task_points.value = "";
+			task_location.value = "";
+			task_question.value = "";
+			task_answer.value = "";
 		}
+		Session.set("creating_task", 0);
 		return false;
-	}
+	},
+	'click button.new_task_button' : function() {
+		console.log("creating task");
+  	Session.set("creating_task", 1);
+  	return false;
+  },
+  'click button.delete_task' : function() {
+  	Tasks.remove(this._id);
+  }
 });
