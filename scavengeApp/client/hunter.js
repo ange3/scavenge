@@ -20,8 +20,11 @@ Template.hunter.events({
 			var task_num = phtnm[hunt_id];
 			if (!task_num) {
 				task_num = 0;
-				phtnm[hunt_id] = 0;
+				var to_set = {};
+				to_set[hunt_id] = 0;
+				PlayerHuntTaskNumberMaps.update(phtnm._id, {$set: to_set});
 			}
+			console.log(hunt_id, phtnm);
 			var h_id = hunt._id;
 			var ptaskmap = PlayerTaskStatusMaps.findOne({user_id : player._id});
 			// console.log(task_num);
@@ -31,8 +34,11 @@ Template.hunter.events({
 			var task = [task_num];
 			var status = ptaskmap[task._id];
 			if (!status) {
+				var to_set = {};
+				to_set[hunt_id] = 0;
 				status = 0;
 				ptaskmap[task._id] = 0;
+				PlayerTaskStatusMaps.update(ptaskmap._id, {$set : to_set});
 			}
 		}
 		return false;
@@ -45,21 +51,36 @@ Template.player_hunt_view.events({
 		return false;
 	},
 	'click button.hunt_answer_submit' : function() {
-		PlayerAnswerMaps.update();
+		// PlayerAnswerMaps.update();
+		var user_name = Session.get("user");
+		var user_id = People.findOne({username: user_name})._id;
 		var hunt_id = Session.get("viewing_hunt");
 		var task_list = Tasks.find({hunt_id: hunt_id}).fetch();
 		var numberMap = PlayerHuntTaskNumberMaps.findOne({user_id: user_id});
 		var taskNumber = numberMap[hunt_id];
 		var task = task_list[taskNumber];
-		console.log(task);
+		// console.log(task);
 
+		var correct_answer = task.answer;
+		var user_answer = document.getElementById("hunt_answer_input").value;
+		if (!user_answer) return false;
+		if (user_answer !== correct_answer) {
+			alert("Incorrect");
+			return false;
+		}
+		alert("Correct!");
+		var phunttaskmap = PlayerHuntTaskNumberMaps.find({user_id : user_id});
+		var to_set = {};
 
-		var user_id = PlayerAnswerMaps.get("user_id");
+		to_set[phunttaskmap.user_id][hunt_id] = phunttaskmap[hunt_id] + 1;
+		PlayerHuntTaskNumberMaps.update(phunttaskmap._id, {$set: to_set});
+		console.log(PlayerHuntTaskNumberMaps.findOne({user_id : user_id}));
+		// phunttaskmap[hunt_id]++;
 		
 		// console.log(user_id);
 		// console.log(taskNumber);
 
-		return false;
+		return true;
 	}
 });
 
@@ -75,35 +96,50 @@ first_task_in_hunt = function(id) {
 	return Tasks.find({hunt_id : id}).fetch()[0];
 }
 
+next_task_in_hunt = function(hunt_id, uid) {
+	console.log(uid, hunt_id);
+	var task_list = Tasks.find({hunt_id : hunt_id}).fetch();
+	var task_num = PlayerHuntTaskNumberMaps.findOne({user_id : uid})[hunt_id];
+	console.log(PlayerHuntTaskNumberMaps.findOne({user_id : uid}));
+	if (task_list.length > task_num) return task_list[task_num];
+	console.log(task_list.length, task_num);
+	return task_list[task_list.length -1];
+}
+
 Template.player_hunt_view.task_name = function() {
 	var hunt = Session.get("viewing_hunt");
-	console.log(hunt, first_task_in_hunt(hunt));
+	var user_id = People.findOne({username : Session.get("user")})._id;
+	// console.log(user_id);
 	if (!hunt || !first_task_in_hunt(hunt)) return "";
-	return first_task_in_hunt(Session.get("viewing_hunt")).name;
+	return next_task_in_hunt(Session.get("viewing_hunt"), user_id).name;
 }
 
 Template.player_hunt_view.task_description = function() {
 	var hunt = Session.get("viewing_hunt");
+	var user_id = People.findOne({username : Session.get("user")})._id;
 	if (!hunt || !first_task_in_hunt(hunt)) return "";
-	return first_task_in_hunt(Session.get("viewing_hunt")).description;
+	return next_task_in_hunt(Session.get("viewing_hunt"), user_id).description;
 }
 
 Template.player_hunt_view.task_question = function() {
 	var hunt = Session.get("viewing_hunt");
+	var user_id = People.findOne({username : Session.get("user")})._id;
 	if (!hunt || !first_task_in_hunt(hunt)) return "";
-	return first_task_in_hunt(Session.get("viewing_hunt")).question;
+	return next_task_in_hunt(Session.get("viewing_hunt"), user_id).question;
 }
 
 Template.player_hunt_view.task_location = function() {
 	var hunt = Session.get("viewing_hunt");
+	var user_id = People.findOne({username : Session.get("user")})._id;
 	if (!hunt || !first_task_in_hunt(hunt)) return "";
-	return first_task_in_hunt(Session.get("viewing_hunt")).location;
+	return next_task_in_hunt(Session.get("viewing_hunt"), user_id).location;
 }
 
 Template.player_hunt_view.task_points = function() {
 	var hunt = Session.get("viewing_hunt");
+	var user_id = People.findOne({username : Session.get("user")})._id;
 	if (!hunt || !first_task_in_hunt(hunt)) return "";
-	return first_task_in_hunt(Session.get("viewing_hunt")).points;
+	return next_task_in_hunt(Session.get("viewing_hunt"), user_id).points;
 }
 
 
