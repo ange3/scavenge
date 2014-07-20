@@ -92,18 +92,8 @@ Template.dashboard.events({
 
 // Editing Hunt Page
 
-Template.hunt_edit.hunt_description = function() {
-  var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
-  if (!hunt) return "";
-  return hunt.description;
-}
-
 Template.add_task.tasks = function(){
-  return Tasks.find({hunt: Session.get("hunt_edit")});
-}
-
-Template.add_task.creating_task = function() {
-  return Session.get("creating_task");
+  return Tasks.find({hunt: Session.get("hunt_edit")}, {sort: {creation_date: -1}});
 }
 
 Template.add_task.creating_task = function() {
@@ -115,10 +105,11 @@ Template.add_task.editing_task = function() {
   return Session.get("editing_task")==this._id;
 }
 
-Template.add_task.tasks = function(){
-  return Tasks.find({hunt: Session.get("hunt_edit")});
+Template.hunt_edit.hunt_description = function() {
+  var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
+  if (!hunt) return "";
+  return hunt.description;
 }
-
 Template.hunt_edit.hunt_name = function() {
   return Session.get("hunt_edit");
 }
@@ -194,6 +185,7 @@ Template.add_task.events({
 										location: task_location.value,
 										question: task_question.value,
 										answer: task_answer.value,
+                    creation_date: new Date(),
 										hunt_id: Hunts.find({name: Session.get("hunt_edit")}).fetch()[0]._id
 
 									});
