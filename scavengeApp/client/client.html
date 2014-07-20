@@ -1,5 +1,6 @@
 <head>
   <title>Huntr</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -10,21 +11,22 @@
   {{#if user_name}}
     {{> content}}
   {{else}}
-    {{> login}}
+    <div class = "login_page">
+      {{> login}}
+    </div>
   {{/if}}
 </template>
 
 <template name = "login">
-  <h1>Welcome to Huntr</h1>
-  <form>
+  <form class = "login_form">
     <fieldset>
-      <legend>Log in or create a new account.</legend>
+      <legend class = "legend_welcome">Welcome to Huntr</legend>
       <!-- <label>Username</label> -->
-      <input type="text" id="login_username" placeholder="Username">
+      <input type="text" id="login_username" placeholder="Login or Register">
 <!--       <label>Password</label>
       <input type="text" placeholder="secrets">
  -->      <br>
-      <button type="submit" class="login_btn">Submit</button>
+      <button type="submit" class="login_btn" id = "login_button_style">Submit</button>
     </fieldset>
   </form>
 </template>

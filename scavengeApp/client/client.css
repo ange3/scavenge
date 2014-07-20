@@ -1,1 +1,47 @@
 /* CSS declarations go here */
+.login_page{
+	text-align: center;
+	/*margin-top: 7%;*/
+	background-color: red;
+	min-height:100%;
+	/*padding: 10% 10%;*/
+	padding-top: 15%;
+	padding-bottom: 30%;
+	background: url('/images/background-backpacker-resize.jpg') no-repeat center center fixed; 
+	font-family: 'Lato', sans-serif;
+}
+
+
+.login_form{
+	/*background-color: #EBF9D7;*/
+	background-color: rgba(235,249,215,0.5);
+	/*opacity: 0.5;*/
+	padding: 10px 10px;
+	width: 30%;
+	margin-left: 56%;	
+	border-radius: 5px;
+}
+
+.legend_welcome{
+	color: rgba(59,134,134,1);
+	font-size: 25px;
+	font-weight: 900;
+}
+
+#login_username{
+		text-align: center;
+
+}
+
+#login_button_style{
+	padding: 3px 8px;
+  font-size: 12px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+
+  color: #fff;
+  /*background-color: #3B8686;*/
+  background-color: rgba(59,134,134,0.5);
+  /*border-color: #357ebd;*/
+}
