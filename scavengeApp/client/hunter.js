@@ -5,10 +5,11 @@ Template.hunter.events({
 		console.log(hunt);
 		if (hunt) {
 			Session.set("viewing_hunt", hunt._id);
+
 			var player = People.findOne({username: Session.get("user")});
 
 			var pscoremap = PlayerScoreMaps.findOne({user_id : player._id});
-			var curr_score = pscoremap[hunt_id];
+			var curr_score = pscoremap[hunt._id];
 			var new_score = (curr_score) ? curr_score : 0;
 			var to_set = {};
 			to_set[hunt_id] = new_score;
@@ -21,7 +22,7 @@ Template.hunter.events({
 				task_num = 0;
 				phtnm[hunt_id] = 0;
 			}
-			var h_id = hunt_id;
+			var h_id = hunt._id;
 			var ptaskmap = PlayerTaskStatusMaps.findOne({user_id : player._id});
 			var task = Tasks.find({hunt_id : h_id}).fetch()[task_num];
 			var status = ptaskmap[task._id];
@@ -41,6 +42,19 @@ Template.player_hunt_view.events({
 	},
 	'click button.hunt_answer_submit' : function() {
 		PlayerAnswerMaps.update();
+		var hunt_id = Session.get("viewing_hunt");
+		var task_list = Tasks.find({hunt_id: hunt_id}).fetch();
+		var numberMap = PlayerHuntTaskNumberMaps.findOne({user_id: user_id});
+		var taskNumber = numberMap[hunt_id];
+		var task = task_list[taskNumber];
+		console.log(task);
+
+
+		var user_id = PlayerAnswerMaps.get("user_id");
+		
+		// console.log(user_id);
+		// console.log(taskNumber);
+
 		return false;
 	}
 });
