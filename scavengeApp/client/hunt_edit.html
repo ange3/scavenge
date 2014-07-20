@@ -1,6 +1,17 @@
 <template name = "hunt_edit">
 	<h1>Editing: {{hunt_name}}</h1>
-	<h2>Location: {{hunt_location}}</h2>
+	{{#if hunt_location}}
+		<h2>Location: {{hunt_location}}</h2>
+		<button type = "submit" class = "edit_location_button">Change</button>
+	{{else}}
+		<h2>Location: </h2>
+		<form>
+    	<fieldset>
+				<input type = "text" id = "hunt_location_input" placeholder = "Your Location">
+				<button type = "submit" class = "add_location_button">Submit</button>
+			</fieldset>
+		</form>
+	{{/if}}
 
 	{{> add_task }}
 </template>
@@ -10,10 +21,18 @@
 		<h3>Tasks/Puzzles</h3>
 		<table>
 			{{#each tasks}}
-				<tr>{{this.name}}</tr>
+				<tr>
+					<td>{{this.name}}</td>
+					<td>{{this.points}}</td>
+				</tr>
 			{{/each}}
 		</table>
-		<input type = "text" id = "add_task_input" placeholder = "Take photo">
-		<button class = "add_task_button">+</button>
+		<form>
+    	<fieldset>
+				<input type = "text" id = "add_task_input" placeholder = "Task">
+				<input type = "text" id = "add_task_points" placeholder = "Points">
+				<button type = "submit" class = "add_task_button">+</button>
+			</fieldset>
+		</form>
 	</div>
 </template>
