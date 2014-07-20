@@ -98,7 +98,30 @@ Template.dashboard.events({
     if (hunt_name) Hunts.insert({name: hunt_name, owner: Session.get("user"), creation_date: new Date()});
     return false;
   }
+  'click button.observe_hunt' : function(){
+    console.log("observing a hunt");
+    // console.log(this);
+    Session.set("hunt_edit", this.name);
+    Session.set("hunt_location", this.location);
+
+    return false;
+  },
+
 });
+
+// Leaderboard
+Template.leaderboard.players= function(){
+  var hunt_id = Hunts.find({name: Session.get("hunt_edit")}).fetch()[0]._id;
+  var scoreMaps = PlayerScoreMaps.find({}).fetch();
+  for (var i = 0; i < scoreMaps.length; i++) {
+    var player = {};
+    var map = scoreMaps[i];
+    var user_id = map["user_id"];
+    player["name"] = People.findOne({_id: user_id}).name;
+    player["score"] = map[hunt_id];
+  }
+  var players = [];
+}
 
 
 
