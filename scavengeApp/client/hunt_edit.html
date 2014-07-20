@@ -27,7 +27,7 @@
   		<b>Description: </b>
   		<form>
       	<fieldset>
-  				<input type = "text" id = "hunt_description_input" placeholder = "Your Description" value = {{hunt_description}}>
+  				<textarea style = "width: 40%" rows = "5" cols = "50" id = "hunt_description_input" placeholder = "Your Description" value = {{hunt_description}}></textarea>
   				<button type = "submit" class = "add_description_button" id = "buttons">Submit</button>
   			</fieldset>
   		</form>
@@ -87,12 +87,17 @@
 <template name ="new_task">
 		<form>
     	<fieldset>
-				<input type = "text" id = "add_task_input" placeholder = "Task">
-				<input type = "text" id = "add_task_points" placeholder = "Points">
-				<input type = "text" id = "add_task_location" placeholder = "Location">
+				<input type = "text" id = "add_task_input" placeholder = "Task" style = "width:60%">
+				<input type = "text" id = "add_task_points" placeholder = "Points" style = "width:6%">
+        <br>
+				<input type = "text" id = "add_task_location" placeholder = "Location" style = "width:60%">
+        <br>
         <!-- <input type = "text" id = "add_task_description" placeholder = "Description"> -->
-				<input type = "text" id = "add_task_question" placeholder = "Question">
-				<input type = "text" id = "add_task_answer" placeholder = "Answer">
+        <textarea style = "width: 60%" rows = "5" cols = "50" id = "add_task_question" placeholder = "Question"></textarea>
+        <br>
+				<!-- <input type = "text" id = "add_task_question" placeholder = "Question"> -->
+				<input type = "text" id = "add_task_answer" placeholder = "Answer" style = "width:60%">
+        <br>
 				<button type = "submit" class = "add_task_button" id = "buttons">
           <i class="icon-plus icon-white"></i>
         </button>
@@ -105,13 +110,15 @@
 </template>
 
 <template name ="edit_task">
-  <input class = "input" type = "text" id = "edit_task_input" placeholder = "Task" value = {{this.name}}>
-  <input class = "input" type = "text" id = "edit_task_points" placeholder = "Points" value = {{this.points}}>
+  <input class = "input" type = "text" id = "edit_task_input" placeholder = "Task" value = {{this.name}} style = "width:60%">
+  <input class = "input" type = "text" id = "edit_task_points" placeholder = "Points" value = {{this.points}} style = "width:6%">
   <br>
-  <input type = "text" id = "edit_task_location" placeholder = "Location" value={{this.location}}>
+  <textarea style = "width: 60%" rows = "5" cols = "50" id = "edit_task_location" placeholder = "Location">{{this.location}}</textarea>
+  <!-- <input type = "text" id = "edit_task_location" placeholder = "Location" value={{this.location}} style = "width:60%"> -->
   <br>
-  <input class = "input" type = "text" id = "edit_task_question" placeholder = "Question" value = {{this.question}}>
-  <input class = "input" type = "text" id = "edit_task_answer" placeholder = "Answer" value = {{this.answer}}>
+  <input class = "input" type = "text" id = "edit_task_question" placeholder = "Question" value = {{this.question}} style = "width:60%">
+  <br>
+  <input class = "input" type = "text" id = "edit_task_answer" placeholder = "Answer" value = {{this.answer}} style = "width:60%">
   <br>
   <button type = "submit" class = "submit_edit_task_button" id = "buttons">Save</button>
   <button class = "cancel-edit-task" id = "buttons">Cancel</button>
