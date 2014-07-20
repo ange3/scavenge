@@ -35,16 +35,35 @@ first_task_in_hunt = function(id) {
 }
 
 Template.player_hunt_view.task_name = function() {
-	if (!Session.get("viewing_hunt")) return "";
+	var hunt = Session.get("viewing_hunt");
+	console.log(hunt, first_task_in_hunt(hunt));
+	if (!hunt || !first_task_in_hunt(hunt)) return "";
 	return first_task_in_hunt(Session.get("viewing_hunt")).name;
 }
 
 Template.player_hunt_view.task_description = function() {
-	if (!Session.get("viewing_hunt")) return "";
+	var hunt = Session.get("viewing_hunt");
+	if (!hunt || !first_task_in_hunt(hunt)) return "";
 	return first_task_in_hunt(Session.get("viewing_hunt")).description;
 }
 
 Template.player_hunt_view.task_question = function() {
-	if (!Session.get("viewing_hunt")) return "";
+	var hunt = Session.get("viewing_hunt");
+	if (!hunt || !first_task_in_hunt(hunt)) return "";
 	return first_task_in_hunt(Session.get("viewing_hunt")).question;
 }
+
+Template.player_hunt_view.task_location = function() {
+	var hunt = Session.get("viewing_hunt");
+	if (!hunt || !first_task_in_hunt(hunt)) return "";
+	return first_task_in_hunt(Session.get("viewing_hunt")).location;
+}
+
+
+
+
+
+
+
+
+

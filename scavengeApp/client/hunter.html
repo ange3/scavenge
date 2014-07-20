@@ -16,11 +16,14 @@
 <template name = "player_hunt_view">
 	{{#if hunt_started}}
 		<div class = "hunt_card">
-			<h1>
-				{{ task_name }}
+			<h1> {{ task_name }} </h1>
+			<h2> {{ task_location }} </h2>
+			<div class = "task_description">
 				{{ task_description }}
+			</div>
+			<div class = "task_question">
 				{{ task_question }}
-			</h1>
+			</div>
 		</div>
 	{{else}}
 		<h1>Welcome!</h1>
