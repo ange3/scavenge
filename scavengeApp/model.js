@@ -6,6 +6,8 @@ Hunts = new Meteor.Collection("hunts");
 
 People = new Meteor.Collection("people");
 
+Tasks = new Meteor.Collection("tasks");
+
 Hunts.allow({
 	insert: function() {
 		return true;

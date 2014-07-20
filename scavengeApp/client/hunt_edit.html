@@ -1,3 +1,19 @@
 <template name = "hunt_edit">
-	<h1>{{hunt_name}}</h1>
+	<h1>Editing: {{hunt_name}}</h1>
+	<h2>Location: {{hunt_location}}</h2>
+
+	{{> add_task }}
+</template>
+
+<template name = "add_task">
+	<div id = "add_task_container">
+		<h3>Tasks/Puzzles</h3>
+		<table>
+			{{#each tasks}}
+				<tr>{{this.name}}</tr>
+			{{/each}}
+		</table>
+		<input type = "text" id = "add_task_input" placeholder = "Take photo">
+		<button class = "add_task_button">+</button>
+	</div>
 </template>

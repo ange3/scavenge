@@ -29,6 +29,10 @@ Template.dashboard.hunts = function(){
   return Hunts.find({});
 }
 
+Template.dashboard.tasks = function(){
+  return Tasks.find({hunt: Session.get("hunt_edit")});
+}
+
 Template.hunt.creating_hunt = function() {
 	return Session.get("creating_hunt");
 }
@@ -46,6 +50,7 @@ Template.dashboard.events({
     console.log("editing a hunt");
     // console.log(this);
     Session.set("hunt_edit", this.name);
+    Session.set("hunt_location", this.location);
     return false;
   },
   'click button.new_hunt' : function() {
@@ -60,4 +65,11 @@ Template.dashboard.events({
   	if (hunt_name) Hunts.insert({name: hunt_name, owner: Session.get("user"), creation_date: new Date()});
   	return false;
   }
+});
+
+
+Template.add_task.events({
+	'click button.add_hunt_button' : function() {
+		return false;
+	}
 });
