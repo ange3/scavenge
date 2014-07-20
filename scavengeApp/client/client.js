@@ -16,9 +16,11 @@ Template.login.events({
       console.log("Logged in as returning user.");
     } else {
       console.log("Creating new user.");
-      People.insert({username: name});
+      var uid = People.insert({username: name});
+      PlayerScoreMaps.insert({user_id: uid});
     }
     Session.set("user", name);
+    var uname = name;
     return false;
   }
 });
