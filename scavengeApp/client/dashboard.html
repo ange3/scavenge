@@ -1,24 +1,44 @@
 <template name = "dashboard"> 
-  <h1>Hi {{user_name}}!!</h1>
-  {{#if creating_hunt}}
-    {{> new_hunt }}
-  {{else}}
-    <button class = "new_hunt"> Create new Hunt </button>
-  {{/if}}
-	<h1>Your Hunts</h1>
-	{{#each hunts}}
-		{{> hunt}}
-	{{/each}}
+  <div class="greeting">
+    <p>Hi {{user_name}}!</p>
+  </div>
+  
+  <div class = "dashboard">
+    <h1>Your Hunts</h1>
+
+    {{#if creating_hunt}}
+      {{> new_hunt }}
+    {{else}}
+      <button class = "new_hunt" id = "hunt_button_new"> 
+        <i class="icon-plus icon-white"></i>
+       Create
+      </button>
+    {{/if}}
+
+    <table class="table" id = "hunts_table">
+      <tbody>
+        {{#each hunts}}
+          <tr>{{> hunt}}</tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  
 </template>
 
 <template name="hunt">	
-	<div class = "hunt_row">
-		{{name}}
-		<p>This is a hunt. Hunt or die!!</p>
-    {{creation_date}}
-		<button class = "edit_hunt"> Work on this hunt </button>
-	</div>
-	
+	<td>{{name}}</td>
+
+  <a href="/hunt_edit.html"><button class = "edit_hunt" id = "hunt_button_edit"> 
+    Observe
+    <!-- <i class="icon-eye-open"></i>  -->
+  </button></a>
+
+	<a href="/hunt_edit.html"><button class = "edit_hunt" id = "hunt_button_edit"> 
+    <i class="icon-pencil icon-white"></i>
+  </button></a>
+
+  
 </template>
 
 <template name ="new_hunt">
@@ -27,7 +47,7 @@
       <!-- <label>Hunt Name</label> -->
       <input type="text" id="hunt_name_input" placeholder="Hunt Name">
       <br>
-      <button type="submit" class="insert_hunt">Submit</button>
+      <button type="submit" class="insert_hunt" id = "hunt_button_new">Submit</button>
     </fieldset>
   </form>
 </template>
