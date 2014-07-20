@@ -1,4 +1,5 @@
 Meteor.startup(function(){
+	console.log('startup function!');
   if (Hunts.find().count() === 0) {
     var maker = "example_owner";
     var hunt_names = ["SF Hunt",

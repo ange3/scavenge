@@ -2,6 +2,7 @@ Template.hunter.events({
 	'click button.hunt_id_submit' : function() {
 		var hunt_id = document.getElementById("hunt_id_input").value;
 		var hunt = Hunts.findOne({_id : hunt_id});
+		console.log(hunt);
 		if (hunt) {
 			Session.set("viewing_hunt", hunt._id);
 			var player = People.findOne({username: Session.get("user")});

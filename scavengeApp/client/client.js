@@ -74,6 +74,7 @@ Template.dashboard.events({
     // console.log(this);
     Session.set("hunt_edit", this.name);
     Session.set("hunt_location", this.location);
+
     return false;
   },
   'click button.new_hunt' : function() {
@@ -103,7 +104,6 @@ Template.add_task.creating_task = function() {
 }
 
 Template.add_task.editing_task = function() {
-  console.log(this);
   return Session.get("editing_task")==this._id;
 }
 
@@ -129,12 +129,16 @@ Template.hunt_edit.events({
 			console.log(loc);
 			var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
 			Hunts.update(hunt._id, {$set: {location: loc}});
+      Session.set("hunt_location", loc);
+      load_map();
 		}
 		return false;
 	},
 	'click button.edit_location_button' : function() {
 		var hunt = Hunts.findOne({name: Session.get("hunt_edit")});
 		Hunts.update(hunt._id, {$set: {location: ""}});
+    Session.set("hunt_location", hunt);
+    load_map();
 		return false;
 	},
 	'click button.add_description_button' : function() {
@@ -254,6 +258,10 @@ Template.add_task.events({
 
 // Map in Edit Hunt page
 
+
+var map;
+var markerArray = [];
+
 init_map_from_address = function(address, map_id, map, zoom_level) {
   var geocoder = new google.maps.Geocoder();
   var results = null;
@@ -274,22 +282,71 @@ init_map_from_address = function(address, map_id, map, zoom_level) {
         map_options
       );
     }
-  });
+    add_markers();
 
+  });
 }
 
-Template.hunt_edit.rendered = function() {
-  var address = "760 Market Street, San Francisco, CA";
+var add_markers = function() {
+  var tasks = Tasks.find({hunt: Session.get("hunt_edit")}, {sort: {creation_date: -1}}).fetch();
+  for (var i = 0; i < tasks.length; i++){
+    console.log(tasks[i].location);
+    var marker_loc = getLatLng(tasks[i].location, tasks[i].name);
+  }
+  console.log(markerArray);
+  for (var i = 0; i<markerArray.length; i++){
+    markerArray[i].setMap(map);
+  }
+};
+
+var load_map = function() {
+  var address = Session.get("hunt_location");
+  if (!address){ 
+    address = "760 Market Street, San Francisco, CA";
+  }
   var options_key = "edit_hunt_map_options";
   var map_id = "edit_hunt_map_canvas";
-  var zoom = 16;
-  var edit_hunt_map = null;
+  var zoom = 14;
+  var edit_hunt_map = map;
 
-  var latlng = new google.maps.LatLng(-34.397, 150.644);
-  var mapOptions = {
-    zoom: 8,
-    center: latlng
-  };
   init_map_from_address(address, map_id, edit_hunt_map, zoom);
-}
 
+  
+};
+
+var getLatLng = function(location, marker_name) {
+  var geocoder = new google.maps.Geocoder();
+  var results = null;
+  var status = null;
+  geocoder.geocode({'address' : location}, function(results, status) {
+    console.log('starting geocoder');
+    if (status == google.maps.GeocoderStatus.OK) {
+      console.log('geocoder status OK');
+      var lat = results[0].geometry.location['k'];
+      var lng = results[0].geometry.location['B'];
+      console.log(lat);
+      console.log(lng);
+
+      var latlng = new google.maps.LatLng(lat, lng);
+
+      var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        title: marker_name
+      })
+      console.log('made a marker!');
+      marker.setMap(map);
+      markerArray.push(marker);
+      // google.maps.event.trigger(map, 'resize');
+      return latlng;
+    } else {
+      console.log("geocoder status NOT OK");
+      return null;
+    }
+  });
+};
+
+
+Template.hunt_edit.rendered = function() {
+  load_map();
+}
